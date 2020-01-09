@@ -1,0 +1,89 @@
+.card p {
+	color: black;
+	font-weight: bold;
+}
+
+.row.event_area {
+	color: white;
+	background-color: rgba(0, 134, 255, 0.9);
+	text-align: center;	
+	line-height: 50px;
+}
+
+.row.event_area p {
+	display: inline;
+}
+
+.row.logo_area {
+	height: 60px;
+	display: flex;
+	align-items: center;
+}
+
+.search_area {
+	text-align: center;
+}
+
+.search_area input {
+	width: 50%;
+	height: 38px;
+	vertical-align: middle;
+	border: 1px solid #bdbdbd;
+}
+.search_area span {
+	background-color: red;
+	width: 25px;
+	height: 25px;
+}
+
+.col-sm-3.login_area {
+	color: black;
+	font-size: 14px;
+	text-align: right;	
+}
+
+.row.main_menu {
+	height: 40px;
+	display: flex;
+	align-items: center;
+	background-color: rgba(0, 203, 238, 0.9);
+	color: #333;
+	font-weight: bold;
+	text-align: center;
+}
+
+.row.main_banner {
+	background-color: rgba(3, 0, 34, 0.9);
+	text-align: center;	
+}
+
+.container.card-columns {
+	padding: 20px;
+}
+
+.row.footer {
+	background-color: #777;
+	height: 50px;
+	display: flex;
+	align-items: center;
+	color: white;
+	text-align: center;
+}
+
+.row.info {
+	background-color: #333;
+	color: white;	
+	font-size: 12px;
+	line-height: 12px;
+	padding: 15px;
+}
+
+.col-sm-3.f_logo {
+	display: flex;
+	align-items: center;	
+}
+
+.col-sm-3.service_info {
+	width: 50%;
+	line-height: 21px;
+}
