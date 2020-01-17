@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<!-- 합쳐지고 최소화된 최신 CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+	<!-- 부가적인 테마 -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+	<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Stylish&display=swap" rel="stylesheet">
+	<style type="text/css">
+		.wrap {
+			width: 900px;
+			margin: auto;
+			font-family: 'Stylish', sans-serif;
+		}
+		.font-blue {
+			color: blue;
+		}
+		a:link {
+  			text-decoration: none;
+		}
+		.input_box {
+			width: 50%;
+			padding: 20px;
+			margin: 0 auto 30px auto;
+			border: 1px solid;
+		}
+	</style>
+	<script type="text/javascript">
+		$(document).ready(function($) {
+        $(document).on("submit", "#submit-form", function(event) {
+          event.preventDefault();
+        });
+      });
+
+		function HideAndShow() {
+            if ($("#PostingBox").css("display") == "none") {
+            $('#PostingBox').show();
+       		} else {
+       			$('#PostingBox').hide();
+       		} 
+        };
+
+        function goSave() {
+        urlValue = $("#inputArticle").val();
+        commentValue = $("#inputComment").val();
+        $.ajax({
+          type: "GET",
+          url: urlValue,
+          data: {},
+          success: function(response) {
+            console.log("inputArticle : " + urlValue);
+            console.log("inputComment : " + commentValue);
+            alert("저장완료");
+            makeSomeCard();
+            $("#postingbox").hide();
+            $("#inputArticle").val = "기사 URL을 입력해주세요";
+            $("#inputComment").val = "코멘트를 입력해주세요";
+          }
+        });
+      }
+
+      // function goSave(){
+      //       let txt1 = $('#inputArticle').val();
+      //       let txt2 = $('#inputComment').val();
+      //       if (txt1 == ''){
+      //       alert('URL을 입력하세요!');
+      //       } else if (txt2 == ''){
+      //       alert('코멘트를 입력하세요!');
+      //       } else {
+      //       alert(txt1+txt2);
+      //       }
+      //   }
+
+	</script>
+</head>
+<body>
+	<div class="wrap">
+		<div class="jumbotron">
+			<h1 class="display-4">나홀로 링크 메모장</h1>
+			<p class="lead">중요한 링크를 저장해두고, 나중에 볼 수 있는 공간입니다.</p>
+			<hr class="my-4">			
+			<a class="btn btn-primary btn-lg" href="#" role="button" onclick="HideAndShow()">포스팅박스 열기</a>
+			<button onclick="makeSomeCard()" class="btn btn-primary btn-lg">전체삭제</button>
+		</div>
+		<div class="input_box" id="PostingBox">
+			<form>
+				<div class="form-group">
+				<label for="inputArticle">아티클 URL</label>
+				<input type="text" class="form-control" id="inputArticle" aria-describedby="titleHelp">			
+				</div>
+				<div class="form-group">
+				<label for="inputComment">간단 코멘드</label>
+				<textarea class="form-control" id="inputComment"></textarea>
+				</div>			
+				<button onclick="goSave()" type="submit" class="btn btn-primary">기사저장</button>
+			</form>
+		</div>
+		<div class="card-columns">
+			
+		</div>
+</body>
+</html>
