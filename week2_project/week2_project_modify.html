@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<!-- JQuery 가져오기 -->
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
+  	</script>
+
+  	<!-- 부트스트랩 가져오기 -->
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+ 	 <!-- 부트스트랩 가져오기 2 -->
+	 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">	
+	
+	<link href="https://fonts.googleapis.com/css?family=Stylish&display=swap" rel="stylesheet">
+	<style type="text/css">
+		.wrap {
+			width: 900px;
+			margin: auto;
+			font-family: 'Stylish', sans-serif;
+		}
+		.font-blue {
+			color: blue;
+		}
+		a:link {
+  			text-decoration: none;
+		}
+		.input_box {
+			width: 50%;
+			padding: 20px;
+			margin: 0 auto 30px auto;
+			border: 1px solid;
+		}
+	</style>
+	<script type="text/javascript">
+		$(document).ready(function($) {
+			listing();
+        $(document).on("submit", "#submit-form", function(event) {
+          event.preventDefault();
+        });
+      });
+		
+		function listing() {
+		  $.ajax({
+		    type: "GET",
+		    url: "http://spartacodingclub.shop/post",
+		    data: {},
+		    success: function(response){
+		       let articles = response['articles'];
+		       for (let i = 0; i < articles.length; i++) {
+		         makeSomeCard(articles[i]['comment'],articles[i]['desc'],articles[i]['image'],articles[i]['title'],articles[i]['url'])
+		       }
+		    }
+		  })
+		}
+
+		function HideAndShow() {
+            if ($("#PostingBox").css("display") == "none") {
+            $('#PostingBox').show();
+       		} else {
+       			$('#PostingBox').hide();
+       		} 
+        };
+
+		function makeSomeCard(comment, desc, image, title, url) {
+		  let temp_html = '<div class="card">\
+		    <img class="card-img-top" src="'+image+'" alt="Card image cap">\
+		    <div class="card-body">\
+		      <a href="'+url+'" target="_blank" class="card-title">'+title+'</a>\
+		      <p class="card-text">'+desc+'</p>\
+		      <p class="card-text comment">'+comment+'</p>\
+		    </div>\
+		  </div>';
+		  $('#cards-box').append(temp_html);
+	}
+	</script>
+</head>
+<body>
+	<div class="wrap">
+		<div class="jumbotron">
+			<h1 class="display-4">나홀로 링크 메모장</h1>
+			<p class="lead">중요한 링크를 저장해두고, 나중에 볼 수 있는 공간입니다.</p>
+			<hr class="my-4">			
+			<a class="btn btn-primary btn-lg" href="#" role="button" onclick="HideAndShow()">포스팅박스 열기</a>
+			<button onclick="deleteItem()" class="btn btn-primary btn-lg">전체삭제</button>
+		</div>
+		<div class="input_box" id="PostingBox">
+			<form id="submit-form">
+				<div class="form-group">
+				<label for="inputArticle">아티클 URL</label>
+				<input type="text" class="form-control" id="inputArticle" aria-describedby="titleHelp">			
+				</div>
+				<div class="form-group">
+				<label for="inputComment">간단 코멘드</label>
+				<textarea class="form-control" id="inputComment"></textarea>
+				</div>			
+				<button onclick="goSave()" type="submit" class="btn btn-primary">기사저장</button>
+			</form>
+		</div>
+		<div class="card-columns" id="cards-box">
+			
+		</div>
+</body>
+</html>
